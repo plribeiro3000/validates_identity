@@ -5,6 +5,7 @@ require 'identity_validator'
 
 class ValidatesIdentity
   autoload :Identity, 'validates_identity/identity'
+  autoload :ShouldaMatchers, 'validates_identity/shoulda_matchers'
 
   class << self
     private

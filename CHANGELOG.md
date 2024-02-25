@@ -1,3 +1,9 @@
+## [0.4.0] - 2024-02-25
+
+### Added
+
+- Shoulda Custom Matcher
+
 ## [0.3.2] - 2024-02-25
 
 ### Fixed

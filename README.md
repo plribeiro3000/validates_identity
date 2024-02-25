@@ -64,6 +64,30 @@ In case of a legacy system where keys were already defined and differ from the o
 ValidatesIdentity.register_identity_type_alias('LegacyIdentity', 'CustomIdentity')
 ```
 
+### Custom scenarios for matching
+
+When adding a new validator, cases of success and error can be added through and API so that the `Matcher` will test against them
+
+```ruby
+ValidatesIdentity::ShouldaMatchers.register_allowed_values('CustomIdentity', ['123456789', '123.456.789'])
+ValidatesIdentity::ShouldaMatchers.register_disallowed_values('CustomIdentity', ['12345679', '12.456.789'])
+```
+
+## Testing
+
+Require matcher in your `spec_helper` or `rails_helper` file:
+
+```ruby
+require 'shoulda/matchers/active_model/require_a_valid_identity_matcher'
+```
+
+Use in your tests:
+
+```ruby
+it { is_expected.to require_a_valid_identity } # It will test the attributes :identity and :identity_type by default
+it { is_expected.to require_a_valid_identity(:id, :my_type) }
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
