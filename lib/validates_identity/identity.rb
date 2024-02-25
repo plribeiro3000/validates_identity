@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ValidatesIdentity
+class ValidatesIdentity
   class Identity
     attr_reader :record, :attribute, :value, :options
 

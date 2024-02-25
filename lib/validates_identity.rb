@@ -3,7 +3,7 @@
 require 'active_model'
 require 'identity_validator'
 
-module ValidatesIdentity
+class ValidatesIdentity
   autoload :Identity, 'validates_identity/identity'
 
   class << self

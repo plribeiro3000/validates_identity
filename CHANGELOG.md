@@ -1,3 +1,9 @@
+## [0.3.1] - 2024-02-25
+
+### Fixed
+
+- Validators registration
+
 ## [0.3.0] - 2024-02-25
 
 ### Added
