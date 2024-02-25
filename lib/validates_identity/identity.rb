@@ -19,8 +19,14 @@ class ValidatesIdentity
 
       return false if validator_class.nil?
 
-      validator = validator_class.new(value)
-      validator.valid?
+      @validator = validator_class.new(value)
+      @validator.valid?
+    end
+
+    def formatted
+      return if @validator.nil?
+
+      @validator.formatted
     end
 
     private
