@@ -24,8 +24,28 @@ Just use as any other validator:
 
 ```ruby
 class User < ActiveRecord::Base
-  validates :identity, identity: true
+  # :identity_type is the attribute that will be used to determine the identity type and is required
+  validates :identity, identity: { identity_type: :identity_type }
 end
+```
+
+## Advanced Usage
+
+New Identity Validators can be registered through the public apis of `ValidatesIdentity`
+
+```ruby
+ValidatesIdentity.register_identity_type('CustomIdentity', CustomIdentityValidator)
+```
+
+Each Validator should have:
+
+- a constructor with 2 params: `value` and `options` as a hash
+- a `valid?` method that returns a boolean
+
+In case of a legacy system where keys were already defined and differ from the official ones, aliases can be registered as well
+
+```ruby
+ValidatesIdentity.register_identity_type_alias('LegacyIdentity', 'CustomIdentity')
 ```
 
 ## Development
