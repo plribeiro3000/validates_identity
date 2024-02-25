@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class TestValidator
-  def initialize(value, options)
+  def initialize(value)
     @value = value
-    @options = options
   end
 
   def valid?

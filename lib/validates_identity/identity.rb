@@ -2,10 +2,11 @@
 
 module ValidatesIdentity
   class Identity
-    attr_reader :record, :value, :options
+    attr_reader :record, :attribute, :value, :options
 
-    def initialize(record, value, options)
+    def initialize(record, attribute, value, options)
       @record = record
+      @attribute = attribute
       @value = value
       @options = options
     end
@@ -18,7 +19,7 @@ module ValidatesIdentity
 
       return false if validator_class.nil?
 
-      validator = validator_class.new(value, options)
+      validator = validator_class.new(value)
       validator.valid?
     end
 

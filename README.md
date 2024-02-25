@@ -31,6 +31,19 @@ end
 
 ## Advanced Usage
 
+### Format
+
+The `format` option can be used to format the final identity value.
+
+```ruby
+class User < ActiveRecord::Base
+  # :identity_type is the attribute that will be used to determine the identity type and is required
+  validates :identity, identity: { identity_type: :identity_type, format: true }
+end
+```
+
+### Custom Validators
+
 New Identity Validators can be registered through the public apis of `ValidatesIdentity`
 
 ```ruby
@@ -39,8 +52,11 @@ ValidatesIdentity.register_identity_type('CustomIdentity', CustomIdentityValidat
 
 Each Validator should have:
 
-- a constructor with 2 params: `value` and `options` as a hash
+- a constructor with 1 param: `value`
 - a `valid?` method that returns a boolean
+- a `formatted` method that returns the value formatted
+
+### Validators Aliases
 
 In case of a legacy system where keys were already defined and differ from the official ones, aliases can be registered as well
 

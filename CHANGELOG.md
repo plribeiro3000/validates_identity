@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Added
+
+- `Format` option to format the final identity value
+
 ## [0.2.0] - 2024-02-25
 
 ### Added
