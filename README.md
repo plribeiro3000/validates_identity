@@ -1,6 +1,7 @@
 # ValidatesIdentity
 
 This projects aims to validate several countries person identification documents.
+It works on top of 2 attributes, so that the identity can be determined by a second value and thus validate the first one accordingly
 
 ## Installation
 
@@ -17,6 +18,13 @@ And then execute:
 Or install it yourself as:
 
     $ gem install validates_identity
+
+## Official Plugins
+
+Just require the plugins you want/need in your Gemfile and you will be good to go
+
+- [Brazilian CPF](https://github.com/plribeiro3000/validates_identity-br_cpf)
+- [Brazilian CNPJ](https://github.com/plribeiro3000/validates_identity-br_cnpj)
 
 ## Usage
 
