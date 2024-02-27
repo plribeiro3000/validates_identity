@@ -10,26 +10,57 @@ class ValidatesIdentity
   class << self
     private
 
+    def person_identity_types
+      @person_identity_types ||= {}
+    end
+
+    def legal_identity_types
+      @legal_identity_types ||= {}
+    end
+
     def identity_types
-      @identity_types ||= {}
+      person_identity_types.merge(legal_identity_types)
+    end
+
+    def person_identity_type_aliases
+      @person_identity_type_aliases ||= {}
+    end
+
+    def legal_identity_type_aliases
+      @legal_identity_type_aliases ||= {}
     end
 
     def identity_type_aliases
-      @identity_type_aliases ||= {}
+      person_identity_type_aliases.merge(legal_identity_type_aliases)
     end
   end
 
-  def self.register_identity_type(identity_type_acronym, identity_type_validator)
-    identity_types[identity_type_acronym] = identity_type_validator
-    identity_type_aliases[identity_type_acronym] = identity_type_acronym
+  def self.register_person_identity_type(identity_type_acronym, identity_type_validator)
+    person_identity_types[identity_type_acronym] = identity_type_validator
+    register_person_identity_type_alias(identity_type_acronym, identity_type_acronym)
   end
 
-  def self.register_identity_type_alias(identity_type, identity_type_alias)
-    identity_type_aliases[identity_type_alias] = identity_type
+  def self.register_legal_identity_type(identity_type_acronym, identity_type_validator)
+    legal_identity_types[identity_type_acronym] = identity_type_validator
+    register_legal_identity_type_alias(identity_type_acronym, identity_type_acronym)
   end
 
-  def self.get_validator(identity_type)
-    identity_alias = identity_type_aliases[identity_type]
+  def self.register_person_identity_type_alias(identity_type, identity_type_alias)
+    person_identity_type_aliases[identity_type_alias] = identity_type
+  end
+
+  def self.register_legal_identity_type_alias(identity_type, identity_type_alias)
+    legal_identity_type_aliases[identity_type_alias] = identity_type
+  end
+
+  def self.get_validator(identity_type, type: :both)
+    identity_alias =
+      case type
+      when :person then person_identity_type_aliases[identity_type]
+      when :legal then legal_identity_type_aliases[identity_type]
+      else identity_type_aliases[identity_type]
+      end
+
     identity_types[identity_alias]
   end
 end

@@ -38,42 +38,55 @@ class User < ActiveRecord::Base
 end
 ```
 
-## Advanced Usage
-
-### Format
+### Format Option
 
 The `format` option can be used to format the final identity value.
 
 ```ruby
 class User < ActiveRecord::Base
-  # :identity_type is the attribute that will be used to determine the identity type and is required
+  # all values will be formatted after successful validation
   validates :identity, identity: { identity_type: :identity_type, format: true }
 end
 ```
 
-### Custom Validators
+### Only Option
+
+The `only` option can be used to narrow down the validators
+
+```ruby
+class User < ActiveRecord::Base
+  # will accept only person identity types
+  validates :identity, identity: { identity_type: :identity_type, only: :person }
+  # will accept only legal identity types
+  validates :identity, identity: { identity_type: :identity_type, only: :legal }
+end
+```
+
+### Aliases
+
+In case of a legacy system where keys were already defined and differ from the official ones, aliases can be registered to easy the transition
+
+```ruby
+ValidatesIdentity.register_person_identity_type_alias('LegacyIdentity', 'CustomIdentity')
+ValidatesIdentity.register_legal_identity_type_alias('LegacyIdentity', 'CustomIdentity')
+```
+
+### Adding your own Validators
 
 New Identity Validators can be registered through the public apis of `ValidatesIdentity`
 
 ```ruby
-ValidatesIdentity.register_identity_type('CustomIdentity', CustomIdentityValidator)
+ValidatesIdentity.register_person_identity_type('CustomIdentity', CustomIdentityValidator)
+ValidatesIdentity.register_legal_identity_type('CustomIdentity', CustomIdentityValidator)
 ```
 
-Each Validator should have:
+A Validator must implement:
 
 - a constructor with 1 param: `value`
 - a `valid?` method that returns a boolean
-- a `formatted` method that returns the value formatted
+- a `formatted` method that returns the formatted value
 
-### Validators Aliases
-
-In case of a legacy system where keys were already defined and differ from the official ones, aliases can be registered as well
-
-```ruby
-ValidatesIdentity.register_identity_type_alias('LegacyIdentity', 'CustomIdentity')
-```
-
-### Custom scenarios for matching
+### Adding scenarios to the matcher
 
 When adding a new validator, cases of success and error can be added through and API so that the `Matcher` will test against them
 

@@ -1,3 +1,9 @@
+## [Unreleased]
+
+### Added
+
+- `:only` option to restrict the validation to a specific entity (person or legal)
+
 ## [0.4.0] - 2024-02-25
 
 ### Added

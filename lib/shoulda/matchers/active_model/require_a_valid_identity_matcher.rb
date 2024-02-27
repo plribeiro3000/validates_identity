@@ -13,14 +13,23 @@ module Shoulda
         def initialize(identity, identity_type)
           super(identity)
           @identity_type = identity_type
+          @type = :both
         end
 
         def description
-          'requires a valid identity'
+          case @type
+          when :person then 'require a valid person identity'
+          when :legal then 'require a valid legal identity'
+          else 'require a valid identity'
+          end
         end
 
         def failure_message
-          'does not require a valid identity'
+          case @type
+          when :person then 'does not require a valid person identity'
+          when :legal then 'does not require a valid legal identity'
+          else 'expected to require a valid identity'
+          end
         end
 
         def matches?(subject)
@@ -28,7 +37,7 @@ module Shoulda
 
           result = []
 
-          ValidatesIdentity::ShouldaMatchers.allowed_values.each do |identity_type, values|
+          allowed_values.each do |identity_type, values|
             subject.send("#{@identity_type}=", identity_type)
 
             values.each do |value|
@@ -36,7 +45,7 @@ module Shoulda
             end
           end
 
-          ValidatesIdentity::ShouldaMatchers.disallowed_values.each do |identity_type, values|
+          disallowed_values.each do |identity_type, values|
             subject.send("#{@identity_type}=", identity_type)
 
             values.each do |value|
@@ -45,6 +54,40 @@ module Shoulda
           end
 
           result.inject(:&)
+        end
+
+        private
+
+        def allowed_values
+          case @type
+          when :person then person_allowed_values
+          when :legal then legal_allowed_values
+          else ValidatesIdentity::ShouldaMatchers.allowed_values
+          end
+        end
+
+        def disallowed_values
+          case @type
+          when :person then person_disallowed_values + legal_allowed_values
+          when :legal then legal_disallowed_values + person_allowed_values
+          else ValidatesIdentity::ShouldaMatchers.disallowed_values
+          end
+        end
+
+        def person_allowed_values
+          ValidatesIdentity::ShouldaMatchers.person_allowed_values
+        end
+
+        def person_disallowed_values
+          ValidatesIdentity::ShouldaMatchers.person_disallowed_values
+        end
+
+        def legal_allowed_values
+          ValidatesIdentity::ShouldaMatchers.legal_allowed_values
+        end
+
+        def legal_disallowed_values
+          ValidatesIdentity::ShouldaMatchers.legal_disallowed_values
         end
       end
     end

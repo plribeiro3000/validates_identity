@@ -15,7 +15,7 @@ class ValidatesIdentity
       return true if value.blank?
       return false if options[:identity_type].blank?
 
-      validator_class = ValidatesIdentity.get_validator(identity_type)
+      validator_class = ValidatesIdentity.get_validator(identity_type, type: options[:only])
 
       return false if validator_class.nil?
 

@@ -31,7 +31,7 @@ RSpec.describe ValidatesIdentity::Identity do
 
   context 'with a validator registered' do
     before do
-      ValidatesIdentity.register_identity_type('Test', TestValidator)
+      ValidatesIdentity.register_person_identity_type('Test', TestValidator)
       user.identity_type = 'Test'
     end
 
@@ -42,8 +42,8 @@ RSpec.describe ValidatesIdentity::Identity do
 
   context 'with an alias for a registered validator' do
     before do
-      ValidatesIdentity.register_identity_type('Test', TestValidator)
-      ValidatesIdentity.register_identity_type_alias('Test', 'Alias')
+      ValidatesIdentity.register_person_identity_type('Test', TestValidator)
+      ValidatesIdentity.register_person_identity_type_alias('Test', 'Alias')
       user.identity_type = 'Alias'
     end
 

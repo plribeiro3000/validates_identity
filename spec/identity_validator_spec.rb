@@ -22,7 +22,7 @@ RSpec.describe IdentityValidator do
 
   context 'with valid identity' do
     before do
-      ValidatesIdentity.register_identity_type('Test', TestValidator)
+      ValidatesIdentity.register_person_identity_type('Test', TestValidator)
       user.identity = '11144477735'
       user.identity_type = 'Test'
       user.valid?

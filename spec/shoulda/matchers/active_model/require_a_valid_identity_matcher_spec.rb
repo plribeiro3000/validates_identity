@@ -7,9 +7,9 @@ RSpec.describe Shoulda::Matchers::ActiveModel::RequireAValidIdentityMatcher do
   subject { User.new }
 
   before do
-    ValidatesIdentity.register_identity_type('Test', TestValidator)
-    ValidatesIdentity::ShouldaMatchers.register_allowed_values('Test', ['11144477735'])
-    ValidatesIdentity::ShouldaMatchers.register_disallowed_values('Test', ['123'])
+    ValidatesIdentity.register_person_identity_type('Test', TestValidator)
+    ValidatesIdentity::ShouldaMatchers.register_person_allowed_values('Test', ['11144477735'])
+    ValidatesIdentity::ShouldaMatchers.register_person_disallowed_values('Test', ['123'])
   end
 
   it { is_expected.to require_a_valid_identity(:identity, :identity_type) }
