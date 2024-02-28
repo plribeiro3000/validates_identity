@@ -68,8 +68,8 @@ module Shoulda
 
         def disallowed_values
           case @type
-          when :person then person_disallowed_values + legal_allowed_values
-          when :legal then legal_disallowed_values + person_allowed_values
+          when :person then person_disallowed_values.deep_merge(legal_allowed_values)
+          when :legal then legal_disallowed_values.deep_merge(person_allowed_values)
           else ValidatesIdentity::ShouldaMatchers.disallowed_values
           end
         end

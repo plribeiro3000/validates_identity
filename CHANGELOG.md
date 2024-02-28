@@ -1,8 +1,14 @@
+## [0.5.2] - 2024-02-28
+
+### Fixed
+
+- Matcher merging of allowed an disallowed values
+
 ## [0.5.1] - 2024-02-28
 
 ### Fixed
 
-- Matcher missing parameter 
+- Matcher missing parameter
 
 ## [0.5.0] - 2024-02-27
 
