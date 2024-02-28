@@ -5,15 +5,15 @@ require 'shoulda-matchers'
 module Shoulda
   module Matchers
     module ActiveModel
-      def require_a_valid_identity(identity = :identity, identity_type = :identity_type)
-        RequireAValidIdentityMatcher.new(identity, identity_type)
+      def require_a_valid_identity(identity = :identity, identity_type = :identity_type, only: :both)
+        RequireAValidIdentityMatcher.new(identity, identity_type, only)
       end
 
       class RequireAValidIdentityMatcher < ValidationMatcher
-        def initialize(identity, identity_type)
+        def initialize(identity, identity_type, type)
           super(identity)
           @identity_type = identity_type
-          @type = :both
+          @type = type
         end
 
         def description

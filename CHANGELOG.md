@@ -1,3 +1,9 @@
+## [0.5.1] - 2024-02-28
+
+### Fixed
+
+- Matcher missing parameter 
+
 ## [0.5.0] - 2024-02-27
 
 ### Added
