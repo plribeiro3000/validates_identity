@@ -2,7 +2,7 @@
 
 ### Changed
 
-- First deployabe version. Ready to Production
+- First deployable version. Ready to Production
 
 ## [0.5.2] - 2024-02-28
 
