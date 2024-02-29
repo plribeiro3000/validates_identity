@@ -1,3 +1,9 @@
+## [1.0.0] - 2024-02-29
+
+### Changed
+
+- First deployabe version. Ready to Production
+
 ## [0.5.2] - 2024-02-28
 
 ### Fixed

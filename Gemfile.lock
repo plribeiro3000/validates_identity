@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    validates_identity (0.5.2)
+    validates_identity (1.0.0)
       activemodel
 
 GEM

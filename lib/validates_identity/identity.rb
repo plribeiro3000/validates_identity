@@ -32,7 +32,7 @@ class ValidatesIdentity
     private
 
     def identity_type
-      record.send(options[:identity_type])
+      record.send(options[:identity_type]).to_sym
     rescue NoMethodError
       :invalid
     end
