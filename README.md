@@ -23,6 +23,7 @@ Or install it yourself as:
 
 Just require the plugins you want/need in your Gemfile and you will be good to go
 
+- [Argentina DNI](https://github.com/plribeiro3000/validates_identity-ar_dni)
 - [Brazilian CPF](https://github.com/plribeiro3000/validates_identity-br_cpf)
 - [Brazilian CNPJ](https://github.com/plribeiro3000/validates_identity-br_cnpj)
 - [Guatemala DPI](https://github.com/plribeiro3000/validates_identity-gt_dpi)
