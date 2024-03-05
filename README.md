@@ -28,6 +28,7 @@ Just require the plugins you want/need in your Gemfile and you will be good to g
 - [Brazilian CNPJ](https://github.com/plribeiro3000/validates_identity-br_cnpj)
 - [Guatemala DPI](https://github.com/plribeiro3000/validates_identity-gt_dpi)
 - [Panama RUC](https://github.com/plribeiro3000/validates_identity-pa_ruc)
+- [Peru RUC](https://github.com/plribeiro3000/validates_identity-pe_ruc)
 - [Mexico RFC](https://github.com/plribeiro3000/validates_identity-mx_rfc)
 
 ## Usage
