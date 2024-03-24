@@ -8,4 +8,8 @@ class TestValidator
   def valid?
     @value == '11144477735'
   end
+
+  def formatted
+    @value
+  end
 end

@@ -12,9 +12,6 @@ class ValidatesIdentity
     end
 
     def valid?
-      return true if value.blank?
-      return false if options[:identity_type].blank?
-
       validator_class = ValidatesIdentity.get_validator(identity_type, type: options[:only])
 
       return false if validator_class.nil?
@@ -26,14 +23,24 @@ class ValidatesIdentity
     def formatted
       return if @validator.nil?
 
-      @validator.formatted
+      if options[:format]
+        @validator.formatted
+      else
+        value
+      end
     end
 
     private
 
     def identity_type
-      record.send(options[:identity_type]).to_sym
+      if [:person, :legal, nil].include?(options[:only])
+        record.send(options[:identity_type]).to_sym
+      else
+        options[:only]
+      end
     rescue NoMethodError
+      message = "The attribute #{options[:identity_type]} is not defined in the model #{record.class}"
+      ActiveSupport::Logger.new($stdout).debug(message)
       :invalid
     end
   end
