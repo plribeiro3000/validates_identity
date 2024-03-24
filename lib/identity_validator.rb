@@ -2,9 +2,10 @@
 
 class IdentityValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
+    configuration = ValidatesIdentity::Configuration.new(record, attribute, value, options)
     identity = ValidatesIdentity::Identity.new(record, attribute, value, options)
 
-    if identity.valid?
+    if configuration.valid? && identity.valid?
       record.send("#{attribute}=", identity.formatted) if options[:format]
     else
       ruby_prior_version_three =
