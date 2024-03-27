@@ -2,11 +2,10 @@
 
 class IdentityValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    configuration = ValidatesIdentity::Configuration.new(record, attribute, value, options)
     identity = ValidatesIdentity::Identity.new(record, attribute, value, options)
 
-    if configuration.valid? && identity.valid?
-      record.send("#{attribute}=", identity.formatted) if options[:format]
+    if usage.valid? && identity.valid?
+      record.send("#{attribute}=", identity.formatted)
     else
       ruby_prior_version_three =
         Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.0.0')
@@ -17,5 +16,12 @@ class IdentityValidator < ActiveModel::EachValidator
         record.errors.add(attribute, :invalid, **options)
       end
     end
+  end
+
+  def usage
+    @usage ||= ValidatesIdentity::Usage.new(
+      options[:identity_type],
+      options[:only]
+    )
   end
 end
