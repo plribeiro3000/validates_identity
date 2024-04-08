@@ -31,6 +31,7 @@ Just require the plugins you want/need in your Gemfile and you will be good to g
 - [Colombia NIT](https://github.com/JonatascNascimento/validates_identity-co_nit)
 - [Guatemala DPI](https://github.com/plribeiro3000/validates_identity-gt_dpi)
 - [Panama RUC](https://github.com/plribeiro3000/validates_identity-pa_ruc)
+- [Peru DNI](https://github.com/plribeiro3000/validates_identity-pe_dni)
 - [Peru RUC](https://github.com/plribeiro3000/validates_identity-pe_ruc)
 - [Mexico RFC](https://github.com/plribeiro3000/validates_identity-mx_rfc)
 
