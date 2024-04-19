@@ -71,6 +71,44 @@ class User < ActiveRecord::Base
 end
 ```
 
+#### Person
+
+One of the options that `only` accept is `:person`.
+This will tell the validator to only accept individual type documents and reject legal type documents
+
+```ruby
+class User < ActiveRecord::Base
+  # will accept only person identity types
+  validates :identity, identity: { identity_type: :identity_type, only: :person }
+end
+```
+
+#### Legal
+
+One of the options that `only` accept is `:legal`.
+This will tell the validator to only accept legal type documents and reject individual type documents
+
+```ruby
+class User < ActiveRecord::Base
+  # will accept only legal identity types
+  validates :identity, identity: { identity_type: :identity_type, only: :legal }
+end
+```
+
+#### Specific Document Type
+
+Another option that `only` accept is a unique document registration key.
+This will tell the validtor to only accept this document type and reject any other one
+
+```ruby
+class User < ActiveRecord::Base
+  # will accept only Argentina DNI
+  validates :identity, identity: { only: 'AR_DNI' }
+end
+```
+
+Note that when using this scenarion it is not necessary neither accepted to define the secondary column through `identity_type`.
+
 ### Aliases
 
 In case of a legacy system where keys were already defined and differ from the official ones, aliases can be registered to easy the transition
