@@ -4,6 +4,7 @@ require 'active_model'
 require 'identity_validator'
 
 class ValidatesIdentity
+  autoload :Definition, 'validates_identity/definition'
   autoload :Identity, 'validates_identity/identity'
   autoload :ShouldaMatchers, 'validates_identity/shoulda_matchers'
 

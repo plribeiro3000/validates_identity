@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
   validates :identity, identity: { identity_type: :identity_type, only: :person }
   # will accept only legal identity types
   validates :identity, identity: { identity_type: :identity_type, only: :legal }
+  validates :identity, identity: { only: 'MX_RFC_PERSON' }
 end
 ```
 
