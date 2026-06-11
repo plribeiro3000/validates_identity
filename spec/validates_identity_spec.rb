@@ -155,4 +155,31 @@ RSpec.describe ValidatesIdentity do
       end
     end
   end
+
+  describe '.get_normalizer' do
+    before do
+      described_class.register_person_identity_type('Test', TestValidator, normalize: ->(value) { value.to_s.upcase })
+      described_class.register_person_identity_type_alias('Test', 'T')
+    end
+
+    context 'with a string value' do
+      it 'returns normalizer' do
+        expect(described_class.get_normalizer('Test').call('abc')).to eq('ABC')
+      end
+
+      it 'returns normalizer for alias' do
+        expect(described_class.get_normalizer('T').call('abc')).to eq('ABC')
+      end
+    end
+
+    context 'with a symbol value' do
+      it 'returns normalizer' do
+        expect(described_class.get_normalizer(:Test).call('abc')).to eq('ABC')
+      end
+
+      it 'returns normalizer for alias' do
+        expect(described_class.get_normalizer(:T).call('abc')).to eq('ABC')
+      end
+    end
+  end
 end

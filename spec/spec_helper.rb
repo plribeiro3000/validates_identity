@@ -20,6 +20,8 @@ RSpec.configure do |config|
     ValidatesIdentity.instance_variable_set(:@legal_identity_types, nil)
     ValidatesIdentity.instance_variable_set(:@person_identity_type_aliases, nil)
     ValidatesIdentity.instance_variable_set(:@legal_identity_type_aliases, nil)
+    ValidatesIdentity.instance_variable_set(:@person_normalizers, nil)
+    ValidatesIdentity.instance_variable_set(:@legal_normalizers, nil)
     ValidatesIdentity::ShouldaMatchers.instance_variable_set(:@person_allowed_values, nil)
     ValidatesIdentity::ShouldaMatchers.instance_variable_set(:@legal_allowed_values, nil)
     ValidatesIdentity::ShouldaMatchers.instance_variable_set(:@person_disallowed_values, nil)

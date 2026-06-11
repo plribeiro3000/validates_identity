@@ -33,7 +33,7 @@ module Shoulda
         end
 
         def matches?(subject)
-          super(subject)
+          super
 
           result = []
 

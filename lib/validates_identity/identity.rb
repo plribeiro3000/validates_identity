@@ -23,11 +23,13 @@ class ValidatesIdentity
     def formatted
       return if @validator.nil?
 
-      if options[:format]
-        @validator.formatted
-      else
-        value
-      end
+      return @validator.formatted if options[:format]
+
+      normalizer = ValidatesIdentity.get_normalizer(identity_type, type: options[:only])
+
+      return value if normalizer.nil?
+
+      normalizer.call(value)
     end
 
     private

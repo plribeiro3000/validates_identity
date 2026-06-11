@@ -8,7 +8,7 @@ class IdentityValidator < ActiveModel::EachValidator
 
     if definition.valid? && identity.valid?
       record.send("#{attribute}=", identity.formatted)
-    elsif ruby_prior_version_three
+    elsif ruby_prior_version_three?
       record.errors.add(attribute, :invalid, options)
     else
       record.errors.add(attribute, :invalid, **options)
@@ -17,7 +17,7 @@ class IdentityValidator < ActiveModel::EachValidator
 
   private
 
-  def ruby_prior_version_three
+  def ruby_prior_version_three?
     Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.0.0')
   end
 

@@ -23,6 +23,18 @@ class ValidatesIdentity
       person_identity_types.merge(legal_identity_types)
     end
 
+    def person_normalizers
+      @person_normalizers ||= {}
+    end
+
+    def legal_normalizers
+      @legal_normalizers ||= {}
+    end
+
+    def normalizers
+      person_normalizers.merge(legal_normalizers)
+    end
+
     def person_identity_type_aliases
       @person_identity_type_aliases ||= {}
     end
@@ -36,13 +48,15 @@ class ValidatesIdentity
     end
   end
 
-  def self.register_person_identity_type(identity_type_acronym, identity_type_validator)
+  def self.register_person_identity_type(identity_type_acronym, identity_type_validator, normalize: nil)
     person_identity_types[identity_type_acronym.to_sym] = identity_type_validator
+    person_normalizers[identity_type_acronym.to_sym] = normalize
     register_person_identity_type_alias(identity_type_acronym, identity_type_acronym)
   end
 
-  def self.register_legal_identity_type(identity_type_acronym, identity_type_validator)
+  def self.register_legal_identity_type(identity_type_acronym, identity_type_validator, normalize: nil)
     legal_identity_types[identity_type_acronym.to_sym] = identity_type_validator
+    legal_normalizers[identity_type_acronym.to_sym] = normalize
     register_legal_identity_type_alias(identity_type_acronym, identity_type_acronym)
   end
 
@@ -63,5 +77,16 @@ class ValidatesIdentity
       end
 
     identity_types[identity_alias]
+  end
+
+  def self.get_normalizer(identity_type, type: :both)
+    identity_alias =
+      case type
+      when :person then person_identity_type_aliases[identity_type.to_sym]
+      when :legal then legal_identity_type_aliases[identity_type.to_sym]
+      else identity_type_aliases[identity_type.to_sym]
+      end
+
+    normalizers[identity_alias]
   end
 end

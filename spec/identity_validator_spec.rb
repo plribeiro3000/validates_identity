@@ -37,6 +37,19 @@ RSpec.describe IdentityValidator do
     end
   end
 
+  context 'with a registered normalizer' do
+    before do
+      ValidatesIdentity.register_person_identity_type('Test', TestValidator, normalize: ->(value) { "normalized-#{value}" })
+      user.identity = '11144477735'
+      user.identity_type = 'Test'
+      user.valid?
+    end
+
+    it 'normalizes the value' do
+      expect(user.identity).to eq('normalized-11144477735')
+    end
+  end
+
   context 'with nil identity' do
     before do
       user.identity = nil
